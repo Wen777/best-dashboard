@@ -4,9 +4,9 @@ Compare several open source dashboard project and choose the suitable one.
 
 ## Candidates
 
-* Grafana + collectd + influxDB
-* [Prometheus](https://prometheus.io/docs/introduction/install/#from-source) + Grafana (optional)
-* [Vector](http://vectoross.io/)
+* [Grafana](grafana_collectd.md) + collectd + influxDB
+* [Prometheus](prometheus.md) + Grafana (optional)
+* [Vector](netflix_vector.md)
 * ---kubernetes dashboard--- (working on it)
 
 ## Step
