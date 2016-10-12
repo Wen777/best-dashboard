@@ -3,7 +3,7 @@
 # Quick Start
 
 * [Prometheus node_exporter build-in dashboard](http://52.53.209.251:9090/consoles/node-overview.html?instance=localhost%3a9100), single node.
-* [PromDash](https://github.com/prometheus/promdash) which is a GUI-based dashboard builder based on Rails/SQL, [demo](http://52.53.209.251:4000/simple-dashboard)
+* [PromDash](https://github.com/prometheus/promdash) is a GUI-based dashboard builder based on Rails/SQL, [demo](http://52.53.209.251:4000/simple-dashboard)
 
 #References
 
