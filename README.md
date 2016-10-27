@@ -7,6 +7,7 @@ Compare several open source dashboard project and choose the suitable one.
 * [Grafana](grafana_collectd.md) + collectd + influxDB
 * [Prometheus](prometheus.md) + Grafana (optional)
 * [Vector](netflix_vector.md)
+* [mesos-ui](https://github.com/Capgemini/mesos-ui)
 * ---kubernetes dashboard--- (working on it)
 
 ## Step
