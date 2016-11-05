@@ -16,5 +16,8 @@
 
     [Explanation](http://stackoverflow.com/a/32869772)
 
+
 ***Picture from WEB UI***
-![Locust Stats, web ui](../img/locust_stats_web.png)
+
+* Statistics Page ![locust stats, web ui](../img/locust_stats_failure.png)
+* Failure Page ![locust stats, web ui](../img/locust_failure.png)
