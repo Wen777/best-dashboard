@@ -6,7 +6,7 @@ There are three approaches to collect the data of metrics of server / applicatio
 2. Prometheus + exporter
 3. Collectd
 
-***None of the above can provide streaming data***
+***None of above can provide streaming data***
 
 1. AWS Cloudwatch provides aggregated metrics data and [*streaming Log*](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_ES_Stream.html). That are two different functions. The streaming log refers to the log created by application or system. (Mesos log, Ubuntu syslog ...).
 2. Prometheus and Collectd provides aggregated data with specific time interval (ex: 15 seconds) too.
