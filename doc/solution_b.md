@@ -23,6 +23,10 @@
     2.1 Locust starts load testing and notifies Consumer server. Consumer starts a cron job to insert the record of load testing into time series database every 15 seconds.
     2.2 Locust finishes the load testing and notifies Consumer server. Consumer insert the last record of load testing into database and canceles the cron job.
 
+#### Modified Locust
+
+    * New parameter, consumer_host "http://xxx-ggg-zzz:port"
+    * Adjust the flow of load testing. Send the request to Consumer server to register load testing event before starts the load testing.
 #### Consumer API
 
 * POST /apiv0.1/event/register
@@ -64,6 +68,7 @@
 
 #### TODO
 
+* [ ] Customize Locust && Build it by docker.
 * [ ] Shell Script for deployment (Docker image && Locust)
 * [ ] Consumer RESTful API server (Queue, influxDB)
 * [ ] Integrate with Slack
