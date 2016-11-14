@@ -1,5 +1,13 @@
 # Soultion B
 
+## Ideas 
+
+* Security
+    * Not allow all the Locust client can connect to database(influxdb)
+    * Only provide fews (limited) APIs to access the database.
+* Extensibility
+    * Easily to replace any component in the future.
+
 ## Components
 
 * Locust: Sent the aggregated load testing data to Consumer.
@@ -9,22 +17,22 @@
 
 ## Single Node
 
-* Customize locust. (--no-web mode)
+* Customized locust. (--no-web mode)
 * Consumer, a restful api server.
 
 #### User Story:
 1. Deploy application on AWS EC2
     1.1 Deploy by Docker image.
 2. Execute locust.
-    2.1 在shell下指令(ex: nohub locust -f ./example_locust.py --host=http://docs.locust.io --no-web -c 5 -r 10 -n 100  --only-summary )
-    2.2 locust運作之前，先發request到Consumer server註冊load testing event 取得event number.
-    3.3 load testing 結束前，發request(含event number, aggregated data)到Consumer server 儲存。
+    2.1 Execute locust from shell / docker run (ex: nohub locust -f ./example_locust.py --host=http://docs.locust.io --no-web -c 5 -r 10 -n 100  --only-summary )
+    2.2 Locust notifies Consumer server before it starts load test and receive a uuid from Consumer as a event id.
+    3.3 Before finishing load testing，send a request (include: event number, aggregated data) to Consumer server to store.
 3. [Consumer] Create the record of load testing in the time series database.
     2.1 Locust starts load testing and notifies Consumer server. Consumer starts a cron job to insert the record of load testing into time series database every 15 seconds.
     2.2 Locust finishes the load testing and notifies Consumer server. Consumer insert the last record of load testing into database and canceles the cron job.
 
 #### Modified Locust
-
+i
 * New parameter, consumer_host "http://xxx-ggg-zzz:port"
 * Adjust the flow of load testing. Send the request to Consumer server to register load testing event before starts the load testing.
 
@@ -32,7 +40,8 @@
 
 * POST /apiv0.1/events/register
     * Register a cron job to insert the record of load testing every 15 seconds.
-    * Required data```{json}
+    * Required data
+```{json}
 {
     startedAt: "Date", // Date, string
     host: "",
