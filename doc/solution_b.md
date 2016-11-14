@@ -10,8 +10,8 @@
 
 ## Components
 
-* Locust: Sent the aggregated load testing data to Consumer.
-* Consumer:
+* [Locust](https://github.com/Wen777/locust): Sent the aggregated load testing data to Consumer.
+* [Consumer](https://github.com/Wen777/metrics-consumer):
     * connect to influxDB.
     * Receive the data from Locust and store the data inside DB.
 
@@ -20,9 +20,15 @@
 * Customized locust. (--no-web mode)
 * Consumer, a restful api server.
 
+
+## Demo
+
+![Grafana](../img/grafana.png)
+
 #### User Story:
-1. Deploy application on AWS EC2
-    1.1 Deploy by Docker image.
+1. Deploy application on AWS ECS
+    1.1 Deploy by Docker image. (Defined in the wen777/microservices/tree/customize deploy/aws-ecs/scripts)
+    1.2 Manually configure the settings of network of aws ec2 security group.
 2. Execute locust.
     2.1 Execute locust from shell / docker run (ex: nohub locust -f ./example_locust.py --host=http://docs.locust.io --no-web -c 5 -r 10 -n 100  --only-summary )
     2.2 Locust notifies Consumer server before it starts load test and receive a uuid from Consumer as a event id.
@@ -32,7 +38,7 @@
     2.2 Locust finishes the load testing and notifies Consumer server. Consumer insert the last record of load testing into database and canceles the cron job.
 
 #### Modified Locust
-i
+
 * New parameter, consumer_host "http://xxx-ggg-zzz:port"
 * Adjust the flow of load testing. Send the request to Consumer server to register load testing event before starts the load testing.
 
@@ -94,7 +100,7 @@ i
 * [X] Shell Script for deployment (Docker image && Locust)
 * [X] Consumer RESTful API server (Queue, influxDB)
 * [ ] Integrate with Slack
-* [ ] Deploy by AWS ECS.
+* [X] Deploy by AWS ECS.
 
 ## Cluster
 
