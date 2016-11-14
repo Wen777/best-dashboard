@@ -25,54 +25,67 @@
 
 #### Modified Locust
 
-    * New parameter, consumer_host "http://xxx-ggg-zzz:port"
-    * Adjust the flow of load testing. Send the request to Consumer server to register load testing event before starts the load testing.
+* New parameter, consumer_host "http://xxx-ggg-zzz:port"
+* Adjust the flow of load testing. Send the request to Consumer server to register load testing event before starts the load testing.
+
 #### Consumer API
 
-* POST /apiv0.1/event/register
+* POST /apiv0.1/events/register
     * Register a cron job to insert the record of load testing every 15 seconds.
     * Required data```{json}
 {
-    time: "Date", // Date, string
-    mode: "", // "single", "cluster", string
-    targetHost: "", // "http:10.10.10.1", Host to load test, string
-    clients: 0, // number of concurrent clients, number
-    hatchRate: 0.1, // The rate per second in which clients are spawned. number
+    startedAt: "Date", // Date, string
+    host: "",
+    measurement: {
+        fields: {
+            clients: 0, // number of concurrent clients, number
+            hatchRate: 0.1, // The rate per second in which clients are spawned. number
+            requests: 0 // The number of requests
+        },
+        tags: {
+            targetHost: "", // "http:10.10.10.1", Host to load test, string
+            mode: "" // "single", "cluster", string
+        }
+    }
 }
+
 ````
-    * Returned data: ```{json}
+    * Returned data:
+```{json}
 {
-    time: "Date", // Date, string
-    uuid: "xkjpw-ajta-jwt", // {host}-{date}-{id}, string
+    uuid: "xkjpw-ajta-jwt", // {random-id}, string
 }
 ```
-* POST /apiv0.1/event/commit
+* POST /apiv0.1/events/commit
     * Task: Insert the last record of load testing into influxDB. Delete the cronjob.
-    * Required data: ```{json}
+    * Required data:
+```{json}
 {
-    time: "Date", // The time of the end of load testing.
-    uuid: "xxx-ggg-zzz", // {host}-{date}-{id}, string
-    statistics: {
-
-    }, // Metrics from Locust
-    statistics_text: "" // the formating from locust, string
-    failures: {
-
-    }, // Metrics from Locust
-    failures_text: "" // Formating by Locust.
+    startedAt: "Date", // The time of the end of load testing.
+    uuid: "xxx-ggg-zzz", // {random-id}, string
+    host: "", // host, string
+    measurement: {
+        fields: {
+           requestStats: {JSON OBJECT} // result of load testing 
+        },
+        tags: {
+            hostname: "", // "http:10.10.10.1", Host to load test, string
+            mode: "" // "single", "cluster", string
+        }
+    }
 }
 ```
 
-* GET /states
+* GET /events/isrunning
     * Display how many cron job running.
 
 #### TODO
 
-* [ ] Customize Locust && Build it by docker.
-* [ ] Shell Script for deployment (Docker image && Locust)
-* [ ] Consumer RESTful API server (Queue, influxDB)
+* [X] Customize Locust && Build it by docker.
+* [X] Shell Script for deployment (Docker image && Locust)
+* [X] Consumer RESTful API server (Queue, influxDB)
 * [ ] Integrate with Slack
-* [ ] Deploy by Mesos.
+* [ ] Deploy by AWS ECS.
 
 ## Cluster
 
