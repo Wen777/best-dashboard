@@ -25,7 +25,7 @@
 
 
 ```
-git clone 
+git clone git@github.com:Wen777/microservices-demo.git
 cd microservices-demo/deploy/aws-ec
 git checkout origin/customize
 STORE_DNS_NAME_HERE=ecs-endpoint ./setup.sh
