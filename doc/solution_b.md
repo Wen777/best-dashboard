@@ -21,7 +21,29 @@
 * Consumer, a restful api server.
 
 
-## Demo
+### Quick Start
+
+
+```
+git clone 
+cd microservices-demo/deploy/aws-ec
+git checkout origin/customize
+STORE_DNS_NAME_HERE=ecs-endpoint ./setup.sh
+
+# After the deployment completed
+# Visi your AWS EC2 console to manually configure the security groups to export the port of your services.
+# Open ports 3000, 4000. 
+
+# Visit your grafana service by browser.
+# Assum the address of grafana service is `grafana_host`  
+# USER: admin, PASSWORD: admin
+http://{grafana_host}:3000
+
+# Start the load testing
+docker run wen777/load-testing -h  `cat ecs-endpoint` -c 10 -r 100 -m {grafana_host}:4000
+```
+
+### Demo
 
 ![Grafana](../img/grafana.png)
 
